@@ -151,10 +151,25 @@ router.post('/login', [
                         })
                     }
 
+
+                    //json web token generation
+                    let token = jwt.sign(
+                        {
+                            id: user._id,
+                            email: user.email
+                        },
+                        token_key,
+                        {
+                            expiresIn: 3600
+                        }
+                    )
+
                     //if password matches 
                     return res.status(200).json({
                         "status": true,
-                        "message": "User Login Success"
+                        "message": "User Login Success",
+                        "token": token,
+                        "user": user
                     })
                 }
             })
