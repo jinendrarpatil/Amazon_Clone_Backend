@@ -8,6 +8,7 @@ const moment = require('moment')
 const User = require('../models/User')
 const token_key = process.env.TOKEN_KEY
 const storage = require('./Storage')
+const verifyToken = require("./../middleware/verify_token")
 
 //middleware stup
 router.use(bodyParser.json())
@@ -180,5 +181,13 @@ router.post('/login', [
                 })
             })
     })
+
+// router.get('/testJWT', verifyToken, (req, res) => {
+//     console.log(req.user)
+//     return res.status(200).json({
+//         status: true,
+//         "message": "JSON web token working..."
+//     })
+// })
 
 module.exports = router;
